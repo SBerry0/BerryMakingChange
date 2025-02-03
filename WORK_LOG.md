@@ -1,8 +1,9 @@
 Name: Sohum Berry
 
-| Date    |    Time     |                                                                                                                                                                                                                                            Update |
-|:--------|:-----------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| 1/27/25 | 9:00-9:50am | After some thinking, I decided to try a recursive approach so that I could try every possibility of coins together and just count that up. My plan is to finish that and then try some speedups to the algorithm and see where it goes from there |
+| Date    |    Time     |                                                                                                                                                                                                                                                                                                                                                            Update |
+|:--------|:-----------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| 1/27/25 | 9:00-9:50am |                                                                                                                 After some thinking, I decided to try a recursive approach so that I could try every possibility of coins together and just count that up. My plan is to finish that and then try some speedups to the algorithm and see where it goes from there |
+| 2/2/25  | 7:50-8:30pm |  I got a running version of my plan working, but I'm running into two issues. The first is that I'm recounting the same combination multiple times, I had a plan for this but it doesn't work because of the second issue, which is that with this current code, I can't figure out how to uninclude a branch that doesn't lead to a sum adding up to the target. |
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.

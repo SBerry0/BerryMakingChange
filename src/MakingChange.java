@@ -14,24 +14,28 @@ public class MakingChange {
      *  for any given total with any given set of coins.
      */
     public static int[] sortedCoins;
+    public static int numWays = 0;
     public static long countWays(int target, int[] coins) {
         Arrays.sort(coins);
         sortedCoins = coins;
 //        System.out.println(Arrays.toString(sortedCoins));
-        return 0;
+        return fillCoins(target, 0, 0);
         // One coin first, continue down that path with other coins
         // After that's done restrict paths to things that won't lead to duplicates
         // If one coin is a factor of another, no need to continue with that
     }
 
-    public static long fillCoins(int target, long sum, int ways) {
-        if (sum == target) {
-            return ways;
+    public static int fillCoins(int target, long sum, int ways) {
+        if (sum > target) {
+            return 0;
+        } else if (sum == target) {
+            return 1;
+        }
+        int localWays = 0;
+        for (int i = 0; i < sortedCoins.length; i++) {
+            localWays += fillCoins(target, sum+sortedCoins[i], ways)+1;
         }
 
-        fillCoins(target, sum+sortedCoins[0], ways+1);
-
-
-        return 0;
+        return localWays;
     }
 }
