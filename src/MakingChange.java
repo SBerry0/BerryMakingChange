@@ -14,7 +14,8 @@ public class MakingChange {
      *  for any given total with any given set of coins.
      */
     public static int[] sortedCoins;
-    public static int numWays = 0;
+    public static int[][] memoizationBoard;
+
     public static long countWays(int target, int[] coins) {
         // Sort to get coins in descending order
         Arrays.sort(coins);
@@ -23,16 +24,34 @@ public class MakingChange {
         for (int i = ascendingSortedCoins.length-1; i >= 0; i--) {
             sortedCoins[ascendingSortedCoins.length-i-1] = ascendingSortedCoins[i];
         }
-        long sum = 0;
-        for (int i = 0; i < sortedCoins.length; i++) {
-            sum += findCoinCombinations(target, sortedCoins, 0, 0);
+
+        memoizationBoard = new int[coins.length][target+1];
+        for (int i = 0; i < coins.length; i++) {
+            memoizationBoard[i][0] = 1;
         }
-//        System.out.println(Arrays.toString(sortedCoins));
-//        return fillCoins(target, 0, ascendingSortedCoins);
-        // One coin first, continue down that path with other coins
-        // After that's done restrict paths to things that won't lead to duplicates
-        // If one coin is a factor of another, no need to continue with that
-        return sum;
+        if (ascendingSortedCoins[0] == 1) {
+            for (int i = 0; i < target; i++) {
+                memoizationBoard[0][i] = 1;
+            }
+        }
+
+        return countWaysMemoization(target, 0);
+    }
+
+    public static long countWaysMemoization(int target, int index) {
+        if (sortedCoins.length == index) {
+            return 0;
+        }
+        if (target == 0) {
+            return 1;
+        }
+        if (target < 0) {
+            return 0;
+        }
+        if (memoizationBoard[])
+        long include = countWaysMemoization(target-sortedCoins[index], index);
+        long exclude = countWaysMemoization(target, index+1);
+        return include + exclude;
     }
 
 //    public static long fillCoins(int target, long ways, int[] coins) {
