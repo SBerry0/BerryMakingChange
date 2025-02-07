@@ -48,9 +48,14 @@ public class MakingChange {
         if (target < 0) {
             return 0;
         }
-        if (memoizationBoard[])
-        long include = countWaysMemoization(target-sortedCoins[index], index);
+        if (memoizationBoard[sortedCoins.length-index-1][target] != 0) {
+            return memoizationBoard[sortedCoins.length-index][target];
+        }
+
+        long include = countWaysMemoization(target - sortedCoins[index], index);
+//        memoizationBoard[sortedCoins.length-index-1][target] = include;
         long exclude = countWaysMemoization(target, index+1);
+
         return include + exclude;
     }
 
