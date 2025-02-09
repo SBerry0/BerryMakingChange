@@ -14,7 +14,7 @@ public class MakingChange {
      *  for any given total with any given set of coins.
      */
     public static int[] sortedCoins;
-    public static int[][] memoizationBoard;
+    public static long[][] memoizationBoard;
 
     public static long countWays(int target, int[] coins) {
         // Sort to get coins in descending order
@@ -25,7 +25,7 @@ public class MakingChange {
             sortedCoins[ascendingSortedCoins.length-i-1] = ascendingSortedCoins[i];
         }
 
-        memoizationBoard = new int[coins.length][target+1];
+        memoizationBoard = new long[coins.length][target+1];
         for (int i = 0; i < coins.length; i++) {
             memoizationBoard[i][0] = 1;
         }
@@ -53,9 +53,9 @@ public class MakingChange {
         }
 
         long include = countWaysMemoization(target - sortedCoins[index], index);
-//        memoizationBoard[sortedCoins.length-index-1][target] = include;
         long exclude = countWaysMemoization(target, index+1);
 
+        memoizationBoard[sortedCoins.length-index-1][target] = include + exclude;
         return include + exclude;
     }
 
