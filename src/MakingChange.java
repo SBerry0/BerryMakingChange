@@ -16,6 +16,8 @@ public class MakingChange {
     public static int[] sortedCoins;
     public static long[][] memoizationBoard;
 
+    public static long[][] tabulationBoard;
+
     public static long countWays(int target, int[] coins) {
         // Sort to get coins in descending order
         Arrays.sort(coins);
@@ -26,12 +28,15 @@ public class MakingChange {
         }
 
         memoizationBoard = new long[coins.length][target+1];
+        tabulationBoard = new long[coins.length][target+1];
         for (int i = 0; i < coins.length; i++) {
             memoizationBoard[i][0] = 1;
+            tabulationBoard[i][0] = 1;
         }
         if (ascendingSortedCoins[0] == 1) {
             for (int i = 0; i < target; i++) {
                 memoizationBoard[0][i] = 1;
+                tabulationBoard[0][i] = 1;
             }
         }
 
@@ -49,7 +54,7 @@ public class MakingChange {
             return 0;
         }
         if (memoizationBoard[sortedCoins.length-index-1][target] != 0) {
-            return memoizationBoard[sortedCoins.length-index][target];
+            return memoizationBoard[sortedCoins.length-index-1][target];
         }
 
         long include = countWaysMemoization(target - sortedCoins[index], index);
@@ -59,32 +64,13 @@ public class MakingChange {
         return include + exclude;
     }
 
-//    public static long fillCoins(int target, long ways, int[] coins) {
-//        if (target < 0) {
-//            return 0;
-//        }
-//        if (target == 0) {
-//            return 1;
-//        }
-//
-//        for (int i = 0; i < coins.length; i++) {
-//            long output = fillCoins(target-coins[i], ways+1, coins);
-//            if (output != 0) {
-//                break;
-//            }
-//        }
-//
-//    }
+    public static long countWaysTabulation(int target, int index) {
+        for (int i = 0; i < tabulationBoard.length; i++) {
+            for (int j = 0; j < tabulationBoard[0].length; j++) {
+                if (tabulationBoard[i][j] == 0) {
 
-    public static long findCoinCombinations(int largeCoin, int[] smallCoins, int count, int index) {
-        if (index >= smallCoins.length) {
-            return 0;
+                }
+            }
         }
-        count += largeCoin / smallCoins[index];
-        if (largeCoin % smallCoins[index] == 0) {
-            return count;
-        }
-
-        return findCoinCombinations(largeCoin % smallCoins[index], smallCoins, count+1, index+1);
     }
 }
