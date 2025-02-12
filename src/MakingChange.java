@@ -67,8 +67,7 @@ public class MakingChange {
 
     public static long countWaysTabulation() {
         for (int i = 0; i < tabulationBoard.length; i++) {
-            for (int j = 0; j < tabulationBoard[0].length; j++) {
-                System.out.print(tabulationBoard[i][j]);
+            for (int j = 1; j < tabulationBoard[0].length; j++) {
                 long exclude;
                 long include;
                 try {
@@ -83,7 +82,6 @@ public class MakingChange {
                 }
                 tabulationBoard[i][j] = include+exclude;
             }
-            System.out.println("");
         }
         return tabulationBoard[tabulationBoard.length-1][tabulationBoard[0].length-1];
     }
