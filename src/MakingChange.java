@@ -39,8 +39,9 @@ public class MakingChange {
                 tabulationBoard[0][i] = 1;
             }
         }
-
-        return countWaysMemoization(target, 0);
+        long mem = countWaysMemoization(target, 0);
+        long tab = countWaysTabulation();
+        return tab;
     }
 
     public static long countWaysMemoization(int target, int index) {
@@ -64,13 +65,26 @@ public class MakingChange {
         return include + exclude;
     }
 
-    public static long countWaysTabulation(int target, int index) {
+    public static long countWaysTabulation() {
         for (int i = 0; i < tabulationBoard.length; i++) {
             for (int j = 0; j < tabulationBoard[0].length; j++) {
-                if (tabulationBoard[i][j] == 0) {
-
+                System.out.print(tabulationBoard[i][j]);
+                long exclude;
+                long include;
+                try {
+                    exclude = tabulationBoard[i-1][j];
+                } catch (IndexOutOfBoundsException e) {
+                    exclude = 0;
                 }
+                try {
+                    include = tabulationBoard[i][j - sortedCoins[i]];
+                } catch (IndexOutOfBoundsException e) {
+                    include = 0;
+                }
+                tabulationBoard[i][j] = include+exclude;
             }
+            System.out.println("");
         }
+        return tabulationBoard[tabulationBoard.length-1][tabulationBoard[0].length-1];
     }
 }
